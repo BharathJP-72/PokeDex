@@ -6,10 +6,9 @@ import {useParams} from 'react-router-dom'
 import Pokemon from '../Pokemon/Pokemon.jsx'
 
 
-function PokemonDetails() {
+function PokemonDetails({pokemonName}) {
 
-  const {id} = useParams()
-  const [pokemon,pokemonListState] = usePokemonDetails(id)
+  const [pokemon,pokemonListState] = usePokemonDetails(pokemonName)
   
   return (
     <>
