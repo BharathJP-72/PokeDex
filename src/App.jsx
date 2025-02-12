@@ -6,7 +6,7 @@ import PokemonDetails from './components/PokemonDetails/PokemonDetails'
 
 function App() {
   return (
-    <Routes>
+    <Routes >
       <Route path="/" element={<Pokedex />} />
       <Route path="/pokemon/:id" element={<PokemonDetails />}  />
       <Route path="*" element={<h1>Not Found!!</h1>}  />
