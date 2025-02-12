@@ -4,16 +4,24 @@ import './PokemonList.css';
 import Pokemon from '../Pokemon/Pokemon';
 
 function PokemonList() {
-    const [pokemonList, setPokemonList] = useState([]);
     const DEFAULT_URL = "https://pokeapi.co/api/v2/pokemon";
-    const [pokedexUrl, setPokedexUrl] = useState(DEFAULT_URL)
-    const [nextUrl, setNextUrl] = useState(DEFAULT_URL)
-    const [prevUrl, setPrevUrl] = useState(DEFAULT_URL)
+
+    // const [pokemonList, setPokemonList] = useState([]);
+    // const [pokedexUrl, setPokedexUrl] = useState(DEFAULT_URL)
+    // const [nextUrl, setNextUrl] = useState(DEFAULT_URL)
+    // const [prevUrl, setPrevUrl] = useState(DEFAULT_URL)
+
+    const [pokemonListState, setPokemonListState] = useState({
+        pokemonList: [],
+        pokedexUrl: DEFAULT_URL,
+        nextUrl: DEFAULT_URL,
+        prevUrl: DEFAULT_URL
+    })
 
 
     async function downloadPokemon() {
         try {
-            const response = await axios.get(pokedexUrl ? pokedexUrl : DEFAULT_URL);
+            const response = await axios.get(pokemonListState.pokedexUrl ? pokemonListState.pokedexUrl : DEFAULT_URL);
             /*axios.get(POKEDEX_URL) sends a GET request to the API.
             
             await ensures that the function waits for the response before moving forward.
@@ -28,8 +36,9 @@ function PokemonList() {
             
             map() creates an array where each item is a promise that represents an HTTP request but hasn't resolved yet.*/
 
-            setPrevUrl(response.data.previous)
-            setNextUrl(response.data.next) 
+            // setPrevUrl(response.data.previous)
+            // setNextUrl(response.data.next) 
+            // setPokemonListState((state) => ({...state, nextUrl:  response.data.next, prevUrl: response.data.previous}))
 
             // Fetch additional details for each Pokémon
             const pokemonPromise = pokemonResults.map(pokemon => axios.get(pokemon.url));
@@ -55,7 +64,8 @@ function PokemonList() {
                 };
             });
 
-            setPokemonList(pokemonFinalList);
+            // setPokemonList(pokemonFinalList);
+            setPokemonListState({...pokemonListState, pokemonList: pokemonFinalList, nextUrl:  response.data.next, prevUrl: response.data.previous})
         } catch (error) {
             console.error("Error fetching Pokémon data:", error);
         }
@@ -63,7 +73,7 @@ function PokemonList() {
 
     useEffect(() => {
         downloadPokemon();
-    }, [pokedexUrl]); 
+    }, [pokemonListState.pokedexUrl]); 
     /*useEffect runs downloadPokemon() only once when the component mounts.
     
     The empty dependency array ([]) ensures it runs only on the first render. */
@@ -72,11 +82,11 @@ function PokemonList() {
         <div className="pokemon-list-wrapper">
             <h2>Pokemon List</h2>
             <div className="page-controls">
-                <button onClick={() => setPokedexUrl(prevUrl)}>Prev</button>
-                <button onClick={() => setPokedexUrl(nextUrl)}>Next</button>
+                <button onClick={() => setPokemonListState({...pokemonListState, pokedexUrl: pokemonListState.prevUrl})}>Prev</button>
+                <button onClick={() => setPokemonListState({...pokemonListState, pokedexUrl: pokemonListState.nextUrl})}>Next</button>
             </div>
             <div className="pokemon-list">
-                {pokemonList.map(pokemon => (
+                {pokemonListState.pokemonList.map(pokemon => (
                     <Pokemon 
                         key={pokemon.id} 
                         id={pokemon.id} 
