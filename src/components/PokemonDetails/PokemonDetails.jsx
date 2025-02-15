@@ -1,3 +1,5 @@
+//The PokemonDetails component is responsible for displaying details of a specific Pokémon when a user clicks on it from the Pokedex list.
+
 import './PokemonDetails.css'
 
 import { Link } from 'react-router-dom'
@@ -53,3 +55,35 @@ function PokemonDetails({pokemonName}) {
 }
 
 export default PokemonDetails
+
+/*1️⃣ Understanding Props: {pokemonName}
+
+pokemonName is passed as a prop from Pokedex.jsx when searching for a Pokémon.
+
+If PokemonDetails is accessed via Pokedex.jsx, it receives pokemonName as a prop.
+
+If accessed via routing (/pokemon/:id), it does not receive pokemonName but will use useParams() (we'll see this later).
+*/
+
+/*
+2️⃣ Fetching Pokémon Data: usePokemonDetails
+
+const [pokemon, pokemonListState] = usePokemonDetail(pokemonName)
+
+usePokemonDetails(pokemonName) is a custom hook that fetches detailed Pokémon data (image, height, weight, type, etc.).
+
+It returns an array:
+	pokemon → The details of the selected Pokémon.
+	pokemonListState → A list of Pokémon similar to the selected one.
+🔹Example: If we are viewing Pikachu, pokemon will contain Pikachu's details, while pokemonListState.pokemonList might contain other Electric-type Pokémon.
+*/
+
+/*
+Final Summary
+✔ PokemonDetails fetches Pokémon details and similar Pokémon using usePokemonDetails().
+✔ If accessed via search, it receives pokemonName as a prop.
+✔ If accessed via a URL like /pokemon/25, it extracts id using useParams().
+✔ Uses <Link> to navigate back to the main Pokedex.
+✔ Displays Pokémon image, height, weight, and type.
+✔ Shows a list of similar Pokémon.
+*/

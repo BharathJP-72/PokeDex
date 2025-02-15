@@ -1,4 +1,4 @@
-import React from 'react'
+//This utility function fetches Pokémon data from the API, extracts useful details, and updates the state in usePokemonList.js.
 
 import axios from 'axios';
 
@@ -61,8 +61,18 @@ async function downloadPokemon(pokemonListState, setPokemonListState,DEFAULT_URL
 
       // setPokemonList(pokemonFinalList);
       setPokemonListState({...pokemonListState, pokemonList: pokemonFinalList, nextUrl:  response.data.next, prevUrl: response.data.previous})
+      //...pokemonListState copies all existing key-value pairs from the current state object.
   } catch (error) {
       console.error("Error fetching Pokémon data:", error);
   }
 }
 export default downloadPokemon
+
+/*📝 Final Summary
+🔹 downloadPokemon is an async function that:
+1️⃣ Fetches a list of Pokémon from the API
+2️⃣ Extracts Pokémon URLs & sends multiple requests for details
+3️⃣ Processes the responses to get ID, name, image, and types
+4️⃣ Updates state (pokemonListState) with the new Pokémon list
+
+🚀 This method makes the Pokédex fast and efficient by fetching Pokémon in batches. */

@@ -11,7 +11,7 @@ function Pokemon({ name, url,id }) {
                     </div>
                     
                         <img src={url} alt={name} />
-            </div>
+            </div>  
         </Link>
 
     );

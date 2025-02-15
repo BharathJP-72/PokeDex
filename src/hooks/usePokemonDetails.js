@@ -53,3 +53,25 @@ function usePokemonDetails(pokemonName) {
 }
 
 export default usePokemonDetails
+
+/*
+🔹 What is useParams() Doing?
+
+const { id } = useParams();
+
+useParams() is a React Router hook.
+It extracts URL parameters from the current route.
+If the user visits /pokemon/25, then:
+
+console.log(id); // Outputs: 25
+
+This means id gets the Pokémon ID from the URL
+*/
+
+/*
+📌 Summary
+✔ Fetches Pokémon details based on pokemonName or id.
+✔ Extracts the first Pokémon type and fetches similar Pokémon.
+✔ Uses useEffect() to fetch data on mount or when ID changes.
+✔ Scrolls to the top smoothly when a new Pokémon is selected.
+*/
