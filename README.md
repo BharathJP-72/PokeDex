@@ -33,7 +33,7 @@ Pokedex/
 │   │   │-- PokemonList/
 │   │   │-- PokemonDetails/
 │   │   │-- Pokemon/
-│   │-- hooks/
+│   │-- hooks/ 
 │   │   │-- useDebounce.js
 │   │   │-- usePokemonList.js
 │   │   │-- usePokemonDetails.js
