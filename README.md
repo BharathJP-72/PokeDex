@@ -7,7 +7,7 @@ A **Pokédex** application built using **React**, allowing users to search, filt
 - **Frontend:** React, React Router
 - **State Management:** Context API, Reducer
 - **API:** PokéAPI (https://pokeapi.co/)
-- **Styling:** CSS/TailwindCSS (if applicable)
+- **Styling:** CSS,TailwindCSS 
 - **Future Enhancements:** Backend with **FastAPI**, MongoDB for user authentication & favorites
 
 ## 🌟 Features
